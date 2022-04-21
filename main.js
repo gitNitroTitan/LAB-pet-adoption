@@ -210,3 +210,38 @@ const pets = [
       imageUrl: "http://lsae2.iypcdn.com/static//modules/uploads/photos/language1/dino-live-22.jpg?119"
     }
   ];
+  const pet = document.querySelector("#pet");
+
+
+  let domString = "";
+  for (const indPet of pets) {
+  
+    domString += `<div class="card" style="width: 18rem;">
+    <header><h5 class="card-title">${indPet.name}</h5></header>
+    <img src="${indPet.imageUrl}" class="card-img-top" alt="pet">
+    <div class="card-body">
+      <p class="pet-color">${indPet.color}</p>
+      <p class="special-skill">${indPet.specialSkill}</p>
+      <div class="card-footer footer-for >${indPet.type}">${indPet.type}
+      </div>
+     </div>
+  </div>`;
+
+  // if (${indPet.type} === "dog"){
+  //     return 
+  // } else if (${indPet.type} === "cat"){
+  //   return 
+  // } else {
+  //   return 
+  // }
+  }
+  pet.innerHTML = domString;
+
+  const changeText = (e) => {
+    console.log(e);
+    if (e.target.id === "main-btn") {
+      document.querySelector('#text').innerHTML = "You clicked that button!";
+      console.log("clicked");
+    }
+  }
+// document.addEventListener('click',)
