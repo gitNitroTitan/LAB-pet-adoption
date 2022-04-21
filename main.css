@@ -1,16 +1,13 @@
 body{
   background-color: plum; 
-  align-items: center;
 }
-.container{
-  padding:20px;
-  text-align:center;
+.buttonContainer{
+  display: flex;
+  justify-content:center;
 } 
 .petContainer{
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-flow: row wrap;
   text-align: center;
 }
 h5{
@@ -18,20 +15,42 @@ h5{
   color: #a1a1a1;
   padding: 20px;
 }
-img{
-   padding:5px;
-   border: 1px solid #021a40;
-   background-color:white;
+pets.imageUrl {
+   padding:0.5em;
+   border: solid white 2px;
+   border-radius: 0.5em;
+   /* margin:5px; */
+}
+.card{
+  margin:1.5em;
+  width: 300px;
+}
+.btn-primary{
+  margin: 1.5em;
+  color: #ffffff;
+  border-color:#d3d3d3;
 }
 #cat-btn{
-background-color: #5bc0de;
-color:white;
+  background-color: #5bc0de;
 }
 #dog-btn{
   background-color:#5cb85b;
-  color:white
 }
 #dino-btn{
   background-color:#f0ad4e;
-  color:white
+}
+.card-footer{
+  align-items: flex-end;
+}
+.footer-for-dog{
+  background-color: #dff0d8;
+  color: green;
+}
+.footer-for-cat{
+  background-color:#daedf7 ;
+  color: blue;
+}
+.footer-for-dino{
+  background-color:#fdf8e3 ;
+  color: #fecb7f;
 }
