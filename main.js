@@ -210,13 +210,33 @@ const pets = [
       imageUrl: "https://png.pngitem.com/pimgs/s/157-1578723_transparent-cute-dinosaur-clipart-cute-dinosaur-cartoon-png.png"
     }
   ];
-  const pet = document.querySelector("#pet");
 
+  //Utility function
+  const renderToDom = (divId, textToRender) => {
+    const selectedElement = document.querySelector(divId);
+    selectedElement.innerHTML = textToRender;
+  };
 
-  let domString = "";
-  for (const indPet of pets) {
-  
-    domString += `<div class="card" text-center">
+  // const pet = document.querySelector("#pet");
+const filterButtons = () => {
+  let domString=`
+  <div class="d-flex flex-wrap justify-content-between my-3">
+    <button id="cat-btn" class="btn btn-primary" type="button">cats</button>
+    <button id="dog-btn" class="btn btn-primary" type="button">dogs</button>
+    <button id="dino-btn" class="btn btn-primary" type="button">dino</button>
+    <button id="clear-btn" class="btn btn-primary" type="button">clear</button>
+  </div>
+  `;
+renderToDom('#filterContainer', domString); 
+}
+
+//Card on DOM
+
+const cardsOnDom = (array) => {
+  let domString = '';
+  for (const indPet of array) {
+    domString += `
+    <div class="card" text-center">
     <header><h5 class="card-title">${indPet.name}</h5></header>
     <img src="${indPet.imageUrl}" class="card-img-top" alt="pet image">
     <div class="card-body">
@@ -226,51 +246,41 @@ const pets = [
       <div class="card-footer footer-for-${indPet.type}">${indPet.type}
       </div>
   </div>`;
-
-  }
-  pet.innerHTML = domString;
-
-  const changeText = (e) => {
-    console.log(e);
-    if (e.target.id === "main-btn") {
-      document.querySelector('#text').innerHTML = "You clicked that button!";
-      console.log("clicked");
     }
-  }
-function filterCards(){
-  document.queryselector('#filter').value;
-  console.log("input");
+ renderToDom('#petContainer',domString);
+ }
 
+const eventListeners = () => {
+
+ //Filter buttons
+ //selecting element on DOM
+ document.querySelector('#filterContainer').addEventListener('click', (e) => {
+  // ***filter on category (either use .filter or a loop)***
+  // rerender DOM with new array (use the cardsOnDom function) 
+  // console.log(e);
+  if (e.target.id === "clear-btn") {
+    cardsOnDom(pets);
+  } else if (e.target.id === "cat-btn") {
+      // console.log('clicked the cats button', e.target.id); event.target(what was clicked).id 
+    cardsOnDom(pets.filter((animal) => animal.type=='cat'));
+  } else if (e.target.id === "dog-btn") {
+    // console.log('clicked the cats button', e.target.id);
+  cardsOnDom(pets.filter((animal) => animal.type=='dog'));
+} else if (e.target.id === "dino-btn") {
+  // console.log('clicked the cats button', e.target.id);
+cardsOnDom(pets.filter((animal) => animal.type=='dino'));
+  } else if (e.target.id) {
+    cardsOnDom(pets.filter((animal) => animal.type === e.target.id));
+  }
+});
 }
-  // filterSelection("all")
-  // function filterSelection(c) {
-  //   var x, i;
-  //   x = document.getElementsByClassName("filterDiv");
-  //   if (c == "all") c = "";
-  //   // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
-  //   for (i = 0; i < x.length; i++) {
-  //     RemoveClass(x[i], "show");
-  //     if (x[i].className.indexOf(c) > -1) AddClass(x[i], "show");
-  //   }
-  // }
-  // // Show filtered elements
-  // function AddClass(element, name) {
-  //   var i, arr1, arr2;
-  //   arr1 = element.className.split(" ");
-  //   arr2 = name.split(" ");
-  //   for (i = 0; i < arr2.length; i++) {
-  //     if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-  //   }
-  // }
-  // // Hide elements that are not selected
-  // function RemoveClass(element, name) {
-  //   var i, arr1, arr2;
-  //   arr1 = element.className.split(" ");
-  //   arr2 = name.split(" ");
-  //   for (i = 0; i < arr2.length; i++) {
-  //     while (arr1.indexOf(arr2[i]) > -1) {
-  //       arr1.splice(arr1.indexOf(arr2[i]), 1);     
-  //     }
-  //   }
-  //   element.className = arr1.join(" ");
-  // }
+
+
+ const startApp = ()=> {
+   filterButtons(); 
+   cardsOnDom(pets);
+   eventListeners();
+ };
+
+ //starts app to use funtions above^^
+ startApp();
