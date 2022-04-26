@@ -9,7 +9,7 @@ body{
   display: flex;
   flex-flow: row wrap;
   text-align: center;
-  justify-content: center;
+  justify-content: center  ;
 }
 h5{
   background-color: lightgrey;
@@ -45,7 +45,13 @@ h5{
   background-color:#f0ad4e;
 }
 #clear-btn{
-  background-color:firebrick;
+  background-color:rgb(46, 44, 44);
+}
+#add-btn{
+  background-color:rgb(13, 233, 61);
+}
+#delete-btn{
+  background-color:rgb(238, 11, 11);
 }
 .card-footer{
   align-items: flex-end;
