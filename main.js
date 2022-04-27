@@ -278,7 +278,7 @@ const pets = [
     renderToDom('#createPetContainer', domString);
   };
   
-  const pet = document.querySelector("#pet");
+  const pet = document.querySelector("#pet");   //bubbling=adding an event listener to a container
 const filterButtons = () => {
   let domString=`
   <div class="d-flex flex-wrap justify-content-between my-3">
@@ -324,34 +324,32 @@ const eventListeners = () => {
   // console.log(e);
   if (e.target.id === "clear-btn") {
     cardsOnDom(pets);
-  } else if (e.target.id === "cat-btn") {
+  } else if (e.target.id === 'cat-btn') {
       // console.log('clicked the cats button', e.target.id); event.target(what was clicked).id 
-    cardsOnDom(pets.filter((animal) => animal.type=='cat'));
+    cardsOnDom(pets.filter((animal) => animal.type=== 'cat'));
   } else if (e.target.id === "dog-btn") {
     // console.log('clicked the cats button', e.target.id);
-  cardsOnDom(pets.filter((animal) => animal.type=='dog'));
+  cardsOnDom(pets.filter((animal) => animal.type==='dog'));
 } else if (e.target.id === "dino-btn") {
   // console.log('clicked the cats button', e.target.id);
-cardsOnDom(pets.filter((animal) => animal.type=='dino'));
-  } else if (e.target.id) {
-    cardsOnDom(pets.filter((animal) => animal.type === e.target.id));
-  }
+cardsOnDom(pets.filter((animal) => animal.type==='dino'));
+   }
 });
 
 document.querySelector('#petContainer').addEventListener('click', (e) => {
   // check to make sure e.target.id is not empty
   if (e.target.id) {
     // get the name off the button ID
-    const [, name] = e.target.id.split("--");
+    const [method, name] = e.target.id.split("--");
     // find the index of the object in the array
     const index = pets.findIndex ((animal)=> animal.name === name);
 
     // delete: this will find the index of item in array and use .splice method
     // if 2 pets have the same name, this will delete the first one in the array
-    if (e.target.id.includes('delete')) {
-      pets.splice(index, 1);
+    if (e.target.id.includes('delete')) { //checks to see if delete id matches before using splice method
+      pets.splice(index, 1);   //uses splice method to delete index [0], and only 1 delete count
     //renders the array minus the deleted card back on the DOM
-      cardsOnDom(pets);
+      cardsOnDom(pets);  //renders cards back on the DOM
     }
   }
 });
@@ -360,8 +358,8 @@ document.querySelector('#petContainer').addEventListener('click', (e) => {
   const form = document.querySelector('form');
   form.addEventListener('submit', (e) => {
     e.preventDefault(); // this goes in EVERY form submit to prevent page reload
-    // grab the values from the form inputs and create an object
-    const newPetObj = {
+    
+    const newPetObj = {                                 //creates a new obect from the form inputs
       name: document.querySelector('#name').value,
       color: document.querySelector('#color').value,
       specialSkill: document.querySelector('#specialSkill').value,
@@ -371,7 +369,6 @@ document.querySelector('#petContainer').addEventListener('click', (e) => {
 
     // push that object to the data array
     pets.push(newPetObj);
-
     cardsOnDom(pets);
     formModal.hide()
     form.reset();
@@ -379,7 +376,6 @@ document.querySelector('#petContainer').addEventListener('click', (e) => {
 };
 
  const startApp = ()=> {
-  //  addNewPet();
    createPetModal();
    filterButtons(); 
    cardsOnDom(pets);
