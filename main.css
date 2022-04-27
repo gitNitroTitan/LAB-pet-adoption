@@ -2,14 +2,20 @@ body{
   background-color: plum; 
 }
 #filterContainer{
-  display: flex;
-  justify-content: center;
+   display: flex;
+   justify-content: center;
+   text-align: center;
+
 } 
 #petContainer{
   display: flex;
   flex-flow: row wrap;
   text-align: center;
-  justify-content: center  ;
+  justify-content: center;
+}
+#createPetContainer{
+  display: flex;
+  justify-content: center;
 }
 h5{
   background-color: lightgrey;
@@ -34,6 +40,10 @@ h5{
   margin: 1.5em;
   color: #ffffff;
   border-color:#d3d3d3;
+  border-radius: 35%;
+}
+.btn-danger{
+  margin:0.5em;
 }
 #cat-btn{
   background-color: #5bc0de;
