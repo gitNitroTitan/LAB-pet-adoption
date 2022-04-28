@@ -293,6 +293,15 @@ renderToDom('#filterContainer', domString);
 
 //Card on DOM
 
+const petsId = () =>{
+  
+pets.forEach((pet,index) => {
+  return pet.id = index + 1;  
+                       
+});
+};
+console.log(pets);  
+
 const cardsOnDom = (array) => {
   let domString = '';
   for (const indPet of array) {
@@ -304,7 +313,7 @@ const cardsOnDom = (array) => {
       <p class="pet-color">${indPet.color}</p>
       <p class="special-skill">${indPet.specialSkill}</p>
       </div> <div>
-      <button class="btn btn-danger" id="delete--${indPet.name}">Delete</button>
+      <button class="btn btn-danger" id="delete--${indPet.id}">Delete</button>
     </div>
       <div class="card-footer footer-for-${indPet.type}">${indPet.type}
       </div>
@@ -340,9 +349,9 @@ document.querySelector('#petContainer').addEventListener('click', (e) => {
   // check to make sure e.target.id is not empty
   if (e.target.id) {
     // get the name off the button ID
-    const [method, name] = e.target.id.split("--");
+    const [method, id] = e.target.id.split("--");
     // find the index of the object in the array
-    const index = pets.findIndex ((animal)=> animal.name === name);
+    const index = pets.findIndex ((animal)=> animal.id === parseInt(id));
 
     // delete: this will find the index of item in array and use .splice method
     // if 2 pets have the same name, this will delete the first one in the array
@@ -359,7 +368,7 @@ document.querySelector('#petContainer').addEventListener('click', (e) => {
   form.addEventListener('submit', (e) => {
     e.preventDefault(); // this goes in EVERY form submit to prevent page reload
     
-    const newPetObj = {                                 //creates a new obect from the form inputs
+    const newPetObj = {  
       name: document.querySelector('#name').value,
       color: document.querySelector('#color').value,
       specialSkill: document.querySelector('#specialSkill').value,
@@ -367,10 +376,11 @@ document.querySelector('#petContainer').addEventListener('click', (e) => {
       imageUrl: document.querySelector('#imageUrl').value,
     };
 
-    // push that object to the data array
+   // push that object to the data array
     pets.push(newPetObj);
     cardsOnDom(pets);
-    formModal.hide()
+    petsId(newPetObj);
+    formModal.hide();
     form.reset();
   });
 };
@@ -379,6 +389,7 @@ document.querySelector('#petContainer').addEventListener('click', (e) => {
    createPetModal();
    filterButtons(); 
    cardsOnDom(pets);
+   petsId(pets);
    eventListeners();
  };
 
